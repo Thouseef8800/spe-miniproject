@@ -34,9 +34,7 @@ pipeline {
 
         stage('Build') {
             steps {
-            dir('calculator') {  // Navigate to the correct directory
                 sh 'mvn clean install'
-                }
             }
         }
 
