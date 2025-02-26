@@ -1,6 +1,6 @@
 - name: Deploy Scientific Calculator
   hosts: servers
-  become: false  # Run commands as root
+  become: yes  # Run commands as root
   tasks:
 
     - name: Install Docker
