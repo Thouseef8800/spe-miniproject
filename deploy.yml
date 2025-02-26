@@ -1,0 +1,26 @@
+- name: Deploy Scientific Calculator
+  hosts: servers
+  become: yes  # Run commands as root
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Start Docker Service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull Docker Image from Docker Hub
+      command: docker pull thouseef8800/scientific-calculator
+
+    - name: Remove any existing container
+      command: docker rm -f calculator_container
+      ignore_errors: yes  
+
+    - name: Run the Calculator Container
+      command: docker run -dit --name calculator_container thouseef8800/scientific-calculator
