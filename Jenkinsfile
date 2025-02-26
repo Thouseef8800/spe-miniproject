@@ -33,9 +33,9 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
+            dir('calculator') {  // Navigate to the correct directory
+            sh 'mvn clean package'
+        }
         }
 
         stage('Test') {
