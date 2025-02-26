@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "Logging in to Docker Hub..."
+                    echo "Logging in to Docker Hub.."
                     echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
                     sudo docker push ${DOCKER_IMAGE}
                     '''
