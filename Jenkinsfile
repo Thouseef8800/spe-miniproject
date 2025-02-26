@@ -74,6 +74,9 @@ pipeline {
                     
 
                     echo "Running Ansible Playbook..."
+                    export LC_ALL=en_US.UTF-8
+                    export LANG=en_US.UTF-8
+                    export LANGUAGE=en_US.UTF-8
                     locale
                     ansible-playbook -i host.ini deploy.yml
                     '''
