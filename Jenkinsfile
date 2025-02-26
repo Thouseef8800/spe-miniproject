@@ -42,8 +42,9 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }
+        dir('calculator') {  // Navigate to the correct directory
+            sh 'mvn test'
+        }
         }
 
         stage('Containerize Application') {
