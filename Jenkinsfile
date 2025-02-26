@@ -42,15 +42,17 @@ pipeline {
 
         stage('Test') {
             steps {
-        dir('calculator') {  // Navigate to the correct directory
-            sh 'mvn test'
-        }
+            dir('calculator') {  // Navigate to the correct directory
+                sh 'mvn test'
+            }
         }
         }
 
         stage('Containerize Application') {
             steps {
+                dir('calculator'){
                 sh 'sudo docker build -t ${DOCKER_IMAGE} .'
+                }
             }
         }
 
