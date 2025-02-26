@@ -4,16 +4,16 @@
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="17.0.14+7-Ubuntu-122.04.1"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/thouseef/spe miniproject/calculator"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/thouseef/spe-miniproject/calculator"/>
     <property name="java.vm.vendor" value="Ubuntu"/>
     <property name="java.vendor.url" value="https://ubuntu.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="path.separator" value=":"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="user.country" value="US"/>
+    <property name="user.country" value="IN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/thouseef/spe miniproject/calculator"/>
+    <property name="user.dir" value="/home/thouseef/spe-miniproject/calculator"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="java.runtime.version" value="17.0.14+7-Ubuntu-122.04.1"/>
     <property name="os.arch" value="amd64"/>
@@ -60,6 +60,6 @@
   </properties>
   <testcase classname="com.thouseef.calculator.CalculatorTest" name="testPower" time="0.002"/>
   <testcase classname="com.thouseef.calculator.CalculatorTest" name="testFactorial" time="0"/>
-  <testcase classname="com.thouseef.calculator.CalculatorTest" name="testNaturalLog" time="0.002"/>
-  <testcase classname="com.thouseef.calculator.CalculatorTest" name="testSquareRoot" time="0"/>
+  <testcase classname="com.thouseef.calculator.CalculatorTest" name="testNaturalLog" time="0.001"/>
+  <testcase classname="com.thouseef.calculator.CalculatorTest" name="testSquareRoot" time="0.001"/>
 </testsuite>
