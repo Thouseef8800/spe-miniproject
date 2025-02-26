@@ -47,11 +47,7 @@ pipeline {
             }
         }
         }
-        stage('Verify Build Output') {
-    steps {
-        sh 'ls -R target/'
-    }
-}
+        
 
         stage('Containerize Application') {
             steps {
