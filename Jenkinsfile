@@ -75,7 +75,7 @@ pipeline {
 
                     echo "Running Ansible Playbook..."
                     locale
-                    ansible-playbook -i hosts.ini deploy.yml
+                    ansible-playbook -i host.ini deploy.yml
                     '''
                 }
             }
