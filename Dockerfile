@@ -4,7 +4,7 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copy the JAR file to the container
-COPY target/ScientificCalculator-1.0-SNAPSHOT.jar calculator.jar
+COPY calculator/target/ScientificCalculator-1.0-SNAPSHOT.jar calculator.jar
 
 # Run the application
 CMD ["java", "-jar", "calculator.jar"]
