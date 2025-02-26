@@ -74,7 +74,7 @@ pipeline {
                     sh '''
                     echo "Creating Ansible hosts.ini file..."
                     echo "[servers]" > hosts.ini
-                    echo "${SERVER_IP} ansible_user=pavan ansible_ssh_private_key_file=${SSH_KEY_PATH}" >> hosts.ini
+                    echo "${SERVER_IP} ansible_user=thouseef ansible_ssh_private_key_file=${SSH_KEY_PATH}" >> hosts.ini
 
                     echo "Running Ansible Playbook..."
                     ansible-playbook -i hosts.ini deploy.yml
