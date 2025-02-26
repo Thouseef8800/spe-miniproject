@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "Granting permissions to Jenkins user."
+                    echo "Granting permissions to Jenkins user.."
                     sudo usermod -aG docker jenkins
                     sudo mkdir -p /var/lib/jenkins/.ssh
                     sudo chown -R jenkins:jenkins /var/lib/jenkins/.ssh
@@ -34,26 +34,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                dir('calculator'){
-                sh 'mvn clean install'
-                }
+                sh 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-            dir('calculator') {  // Navigate to the correct directory
                 sh 'mvn test'
             }
         }
-        }
-        
 
         stage('Containerize Application') {
             steps {
-                
                 sh 'sudo docker build -t ${DOCKER_IMAGE} .'
-                
             }
         }
 
@@ -73,9 +66,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "Creating Ansible hosts.ini file..."
-                    echo "[servers]" > hosts.ini
-                    echo "${SERVER_IP} ansible_user=thouseef ansible_ssh_private_key_file=${SSH_KEY_PATH}" >> hosts.ini
+                    
 
                     echo "Running Ansible Playbook..."
                     ansible-playbook -i hosts.ini deploy.yml
