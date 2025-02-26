@@ -33,15 +33,20 @@ pipeline {
         }
 
         stage('Build') {
+            
             steps {
+                dir('calculator'){
                 sh 'mvn clean package'
+                }
             }
         }
-
+        
         stage('Test') {
             steps {
+                 dir('calculator'){
                 sh 'mvn test'
             }
+        }
         }
 
         stage('Containerize Application') {
