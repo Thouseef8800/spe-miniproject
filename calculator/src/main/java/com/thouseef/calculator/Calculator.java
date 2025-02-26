@@ -6,7 +6,7 @@ public class Calculator {
     // Function to calculate the square root of a number
     public double squareRoot(double x) {
         if (x < 0) {
-            System.out.println("Error: Cannot compute square root of a negative number.");
+            System.out.println("Error: Cannot compute square root of negative number.");
             return -1;
         }
         return Math.sqrt(x);
