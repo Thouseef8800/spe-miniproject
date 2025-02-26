@@ -34,16 +34,17 @@ pipeline {
 
         stage('Build') {
             steps {
-        dir('calculator') {  // Navigate to the correct directory
-            sh 'mvn clean install'
-        }
-    }
+            dir('calculator') {  // Navigate to the correct directory
+                sh 'mvn clean install'
+                }
+            }
         }
 
         stage('Test') {
             steps {
         dir('calculator') {  // Navigate to the correct directory
             sh 'mvn test'
+        }
         }
         }
 
