@@ -34,7 +34,9 @@ pipeline {
 
         stage('Build') {
             steps {
+                dir('calculator'){
                 sh 'mvn clean install'
+                }
             }
         }
 
@@ -48,9 +50,9 @@ pipeline {
 
         stage('Containerize Application') {
             steps {
-                dir('calculator'){
+                
                 sh 'sudo docker build -t ${DOCKER_IMAGE} .'
-                }
+                
             }
         }
 
