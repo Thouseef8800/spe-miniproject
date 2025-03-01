@@ -12,11 +12,11 @@ pipeline {
     }
 
     stages {
-        stage('Setup Permissions') {
+        stage('Configure Access Rights') {
             steps {
                 script {
                     sh '''
-                    echo "Granting permissions to Jenkins user.."
+                    echo "Setting up permissions to Jenkins user.."
                     sudo usermod -aG docker jenkins
                     sudo mkdir -p /var/lib/jenkins/.ssh
                     sudo chown -R jenkins:jenkins /var/lib/jenkins/.ssh
@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Cpmpile Project') {
             
             steps {
                 dir('calculator'){
@@ -41,7 +41,7 @@ pipeline {
             }
         }
         
-        stage('Test') {
+        stage('Run Unit Tests') {
             steps {
                  dir('calculator'){
                 sh 'mvn test'
@@ -49,17 +49,17 @@ pipeline {
         }
         }
 
-        stage('Containerize Application') {
+        stage('Build Docker Image') {
             steps {
                 sh 'sudo docker build -t ${DOCKER_IMAGE} .'
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Upload to Docker Hub') {
             steps {
                 script {
                     sh '''
-                    echo "Logging in to Docker Hub.."
+                    echo "Authenticating with Docker Hub.."
                     echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
                     sudo docker push ${DOCKER_IMAGE}
                     '''
@@ -67,13 +67,13 @@ pipeline {
             }
         }
 
-        stage('Run Ansible Deployment') {
+        stage('Executing Ansible Playbook') {
             steps {
                 script {
                     sh '''
                     
 
-                    echo "Running Ansible Playbook..."
+                    echo "Executing Ansible Deployement..."
                     export LC_ALL=en_US.UTF-8
                     export LANG=en_US.UTF-8
                     export LANGUAGE=en_US.UTF-8
