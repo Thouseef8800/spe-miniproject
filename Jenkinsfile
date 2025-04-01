@@ -29,21 +29,20 @@ pipeline {
             }
         }
 
-        stage('Cpmpile Project') {
-            
+        stage('Compile Project') {
             steps {
-                dir('calculator'){
-                sh 'mvn clean package'
+                dir('calculator') {
+                    sh 'mvn clean package'
                 }
             }
         }
-        
+
         stage('Run Unit Tests') {
             steps {
-                 dir('calculator'){
-                sh 'mvn test'
+                dir('calculator') {
+                    sh 'mvn test'
+                }
             }
-        }
         }
 
         stage('Build Docker Image') {
@@ -57,12 +56,11 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: '1995720d-5a7d-48d3-9f64-f3321ab90224',
                                                   usernameVariable: 'DOCKER_USER',
                                                   passwordVariable: 'DOCKER_PASS')]) {
-                    sh """
-                    echo "log into dockerhub"
-                    echo "${DOCKER_PASS}" | sudo docker login -u "${DOCKER_USER}" --password-stdin
-                    sudo docker push ${DOCKER_IMAGE}
-                    """
-                    
+                    script {
+                        sh 'echo "Logging into Docker Hub"'
+                        sh 'echo $DOCKER_PASS | sudo docker login -u $DOCKER_USER --password-stdin'
+                        sh 'sudo docker push $DOCKER_IMAGE'
+                    }
                 }
             }
         }
@@ -71,9 +69,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    
-
-                    echo "Executing Ansible Deployement..."
+                    echo "Executing Ansible Deployment..."
                     export LC_ALL=en_US.UTF-8
                     export LANG=en_US.UTF-8
                     export LANGUAGE=en_US.UTF-8
