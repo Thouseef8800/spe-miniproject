@@ -86,7 +86,7 @@ pipeline {
             echo "Pipeline executed successfully! The Scientific Calculator is deployed."
         }
         failure {
-            echo "Pipeline failed! Check the logs for errors."
+            echo "Pipeline failed! Check the logs for errors..."
         }
     }
 }
