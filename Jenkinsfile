@@ -5,8 +5,6 @@ pipeline {
         MAVEN_HOME = "/usr/share/maven"
         PATH = "$PATH:$MAVEN_HOME/bin"
         DOCKER_IMAGE = "thouseef8800/scientific-calculator"
-        DOCKER_USERNAME = "thouseef8800"
-        DOCKER_PASSWORD = "Sonu@8800"
         SERVER_IP = "192.168.207.115"
         SSH_KEY_PATH = "/var/lib/jenkins/.ssh/id_rsa"
     }
@@ -18,7 +16,6 @@ pipeline {
                     sh '''
                     echo "Setting up permissions to Jenkins user.."
                     sudo usermod -aG docker jenkins
-                    sudo mkdir -p /var/lib/jenkins/.ssh
                     sudo chown -R jenkins:jenkins /var/lib/jenkins/.ssh
                     sudo chmod 700 /var/lib/jenkins/.ssh
                     '''
@@ -57,12 +54,15 @@ pipeline {
 
         stage('Upload to Docker Hub') {
             steps {
-                script {
+                withCredentials([usernamePassword(credentialsId: '1995720d-5a7d-48d3-9f64-f3321ab90224',
+                                                  usernameVariable: 'DOCKER_USER',
+                                                  passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo "Authenticating with Docker Hub.."
-                    echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
+                    echo "log into dockerhub"
+                    echo "${DOCKER_PASS}" | sudo docker login -u "${DOCKER_USER}" --password-stdin
                     sudo docker push ${DOCKER_IMAGE}
                     '''
+                    
                 }
             }
         }
